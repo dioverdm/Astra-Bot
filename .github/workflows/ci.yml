@@ -10,10 +10,29 @@ jobs:
   lint-and-typecheck:
     name: Lint & Type Check
     runs-on: ubuntu-latest
+    # Only run if GIT_CRYPT_KEY secret is available
+    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      
+      - name: Install git-crypt
+        run: sudo apt-get install -y git-crypt
+      
+      - name: Unlock encrypted files
+        env:
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+        run: |
+          if [ -n "$GIT_CRYPT_KEY" ]; then
+            echo "$GIT_CRYPT_KEY" | base64 -d > ./git-crypt-key
+            git-crypt unlock ./git-crypt-key
+            rm ./git-crypt-key
+            echo "✅ Source files decrypted"
+          else
+            echo "⚠️ GIT_CRYPT_KEY not set, skipping decryption"
+            exit 1
+          fi
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -41,6 +60,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      
+      - name: Install git-crypt
+        run: sudo apt-get install -y git-crypt
+      
+      - name: Unlock encrypted files
+        env:
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+        run: |
+          echo "$GIT_CRYPT_KEY" | base64 -d > ./git-crypt-key
+          git-crypt unlock ./git-crypt-key
+          rm ./git-crypt-key
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
