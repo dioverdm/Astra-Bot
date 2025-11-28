@@ -1,0 +1,398 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   ASTRA DASHBOARD - Global Styles
+   ============================================ */
+
+/* CSS Variables for Themes */
+:root {
+  /* Default: Dark theme */
+  --color-background: #0F172A;
+  --color-surface: #1E293B;
+  --color-accent: #8B5CF6;
+  --color-accent-glow: rgba(139, 92, 246, 0.4);
+  --color-text: #F8FAFC;
+  --color-text-muted: #94A3B8;
+  --color-border: #334155;
+  --gradient-from: #818CF8;
+  --gradient-via: #A78BFA;
+  --gradient-to: #F472B6;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --color-background: #FFFFFF;
+  --color-surface: #F8FAFC;
+  --color-accent: #6366F1;
+  --color-accent-glow: rgba(99, 102, 241, 0.3);
+  --color-text: #1E293B;
+  --color-text-muted: #64748B;
+  --color-border: #E2E8F0;
+  --gradient-from: #6366F1;
+  --gradient-via: #8B5CF6;
+  --gradient-to: #EC4899;
+}
+
+/* Royal Purple Theme */
+[data-theme="royal-purple"] {
+  --color-background: #1A0A2E;
+  --color-surface: #2D1B4E;
+  --color-accent: #9333EA;
+  --color-accent-glow: rgba(147, 51, 234, 0.4);
+  --color-text: #F3E8FF;
+  --color-text-muted: #C4B5FD;
+  --color-border: #4C1D95;
+  --gradient-from: #9333EA;
+  --gradient-via: #7C3AED;
+  --gradient-to: #4F46E5;
+}
+
+/* Midnight Theme */
+[data-theme="midnight"] {
+  --color-background: #020617;
+  --color-surface: #0F172A;
+  --color-accent: #3B82F6;
+  --color-accent-glow: rgba(59, 130, 246, 0.4);
+  --color-text: #E0F2FE;
+  --color-text-muted: #7DD3FC;
+  --color-border: #1E3A5F;
+  --gradient-from: #0EA5E9;
+  --gradient-via: #3B82F6;
+  --gradient-to: #6366F1;
+}
+
+/* Sunset Theme */
+[data-theme="sunset"] {
+  --color-background: #1C1917;
+  --color-surface: #292524;
+  --color-accent: #F97316;
+  --color-accent-glow: rgba(249, 115, 22, 0.4);
+  --color-text: #FEF3C7;
+  --color-text-muted: #FCD34D;
+  --color-border: #44403C;
+  --gradient-from: #F97316;
+  --gradient-via: #EF4444;
+  --gradient-to: #EC4899;
+}
+
+/* Sakura Theme */
+[data-theme="sakura"] {
+  --color-background: #FDF2F8;
+  --color-surface: #FCE7F3;
+  --color-accent: #EC4899;
+  --color-accent-glow: rgba(236, 72, 153, 0.3);
+  --color-text: #831843;
+  --color-text-muted: #BE185D;
+  --color-border: #FBCFE8;
+  --gradient-from: #F472B6;
+  --gradient-via: #EC4899;
+  --gradient-to: #DB2777;
+}
+
+/* Ocean Theme */
+[data-theme="ocean"] {
+  --color-background: #042F2E;
+  --color-surface: #134E4A;
+  --color-accent: #0891B2;
+  --color-accent-glow: rgba(8, 145, 178, 0.4);
+  --color-text: #CCFBF1;
+  --color-text-muted: #5EEAD4;
+  --color-border: #115E59;
+  --gradient-from: #06B6D4;
+  --gradient-via: #0891B2;
+  --gradient-to: #0D9488;
+}
+
+/* Forest Theme */
+[data-theme="forest"] {
+  --color-background: #0D1F0D;
+  --color-surface: #1A3A1A;
+  --color-accent: #22C55E;
+  --color-accent-glow: rgba(34, 197, 94, 0.4);
+  --color-text: #DCFCE7;
+  --color-text-muted: #86EFAC;
+  --color-border: #166534;
+  --gradient-from: #22C55E;
+  --gradient-via: #16A34A;
+  --gradient-to: #15803D;
+}
+
+/* Nord Theme */
+[data-theme="nord"] {
+  --color-background: #2E3440;
+  --color-surface: #3B4252;
+  --color-accent: #88C0D0;
+  --color-accent-glow: rgba(136, 192, 208, 0.4);
+  --color-text: #ECEFF4;
+  --color-text-muted: #D8DEE9;
+  --color-border: #4C566A;
+  --gradient-from: #88C0D0;
+  --gradient-via: #81A1C1;
+  --gradient-to: #5E81AC;
+}
+
+/* Dracula Theme */
+[data-theme="dracula"] {
+  --color-background: #282A36;
+  --color-surface: #44475A;
+  --color-accent: #BD93F9;
+  --color-accent-glow: rgba(189, 147, 249, 0.4);
+  --color-text: #F8F8F2;
+  --color-text-muted: #6272A4;
+  --color-border: #6272A4;
+  --gradient-from: #BD93F9;
+  --gradient-via: #FF79C6;
+  --gradient-to: #8BE9FD;
+}
+
+/* Monokai Theme */
+[data-theme="monokai"] {
+  --color-background: #272822;
+  --color-surface: #3E3D32;
+  --color-accent: #F92672;
+  --color-accent-glow: rgba(249, 38, 114, 0.4);
+  --color-text: #F8F8F2;
+  --color-text-muted: #75715E;
+  --color-border: #49483E;
+  --gradient-from: #F92672;
+  --gradient-via: #FD971F;
+  --gradient-to: #A6E22E;
+}
+
+/* Cyberpunk Theme */
+[data-theme="cyberpunk"] {
+  --color-background: #0D0221;
+  --color-surface: #1A0533;
+  --color-accent: #FF00FF;
+  --color-accent-glow: rgba(255, 0, 255, 0.5);
+  --color-text: #00FFFF;
+  --color-text-muted: #FF00FF;
+  --color-border: #330066;
+  --gradient-from: #FF00FF;
+  --gradient-via: #00FFFF;
+  --gradient-to: #FFFF00;
+}
+
+/* Coffee Theme */
+[data-theme="coffee"] {
+  --color-background: #F5F5DC;
+  --color-surface: #D4C4A8;
+  --color-accent: #8B4513;
+  --color-accent-glow: rgba(139, 69, 19, 0.3);
+  --color-text: #3E2723;
+  --color-text-muted: #5D4037;
+  --color-border: #BCAAA4;
+  --gradient-from: #8B4513;
+  --gradient-via: #A0522D;
+  --gradient-to: #D2691E;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+  opacity: 0.8;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* Focus Styles */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Component Styles
+   ============================================ */
+
+@layer components {
+  /* Card Component */
+  .card {
+    @apply bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] p-6;
+    @apply transition-all duration-300;
+  }
+  
+  .card-hover {
+    @apply hover:border-[var(--color-accent)] hover:shadow-glow;
+  }
+  
+  /* Button Components */
+  .btn {
+    @apply px-4 py-2 rounded-xl font-medium transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply bg-[var(--color-accent)] text-white;
+    @apply hover:opacity-90 hover:shadow-glow;
+    @apply focus:ring-[var(--color-accent)];
+  }
+  
+  .btn-secondary {
+    @apply bg-[var(--color-surface)] text-[var(--color-text)] border border-[var(--color-border)];
+    @apply hover:border-[var(--color-accent)] hover:text-[var(--color-accent)];
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-[var(--color-text-muted)];
+    @apply hover:bg-[var(--color-surface)] hover:text-[var(--color-text)];
+  }
+  
+  /* Input Components */
+  .input {
+    @apply w-full px-4 py-3 rounded-xl;
+    @apply bg-[var(--color-surface)] border border-[var(--color-border)];
+    @apply text-[var(--color-text)] placeholder-[var(--color-text-muted)];
+    @apply focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)];
+    @apply transition-all duration-200;
+  }
+  
+  /* Badge Component */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-primary {
+    @apply bg-[var(--color-accent)]/20 text-[var(--color-accent)];
+  }
+  
+  .badge-success {
+    @apply bg-green-500/20 text-green-400;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-500/20 text-yellow-400;
+  }
+  
+  .badge-error {
+    @apply bg-red-500/20 text-red-400;
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--gradient-from), var(--gradient-via), var(--gradient-to));
+  }
+  
+  /* Gradient Background */
+  .gradient-bg {
+    background-image: linear-gradient(135deg, var(--gradient-from), var(--gradient-via), var(--gradient-to));
+  }
+  
+  /* Glass Effect */
+  .glass {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10;
+  }
+  
+  /* Anime Glow Effect */
+  .anime-glow {
+    box-shadow: 0 0 20px var(--color-accent-glow),
+                0 0 40px var(--color-accent-glow),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+/* Stagger Animation for Lists */
+.stagger-item {
+  opacity: 0;
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.1s; }
+.stagger-item:nth-child(2) { animation-delay: 0.2s; }
+.stagger-item:nth-child(3) { animation-delay: 0.3s; }
+.stagger-item:nth-child(4) { animation-delay: 0.4s; }
+.stagger-item:nth-child(5) { animation-delay: 0.5s; }
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
