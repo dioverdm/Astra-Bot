@@ -1245,11 +1245,12 @@ router.post('/:guildId/music/action', isAuthenticated, canManageGuild, async (re
       case 'shuffle':
         queue.tracks.shuffle();
         break;
-      case 'loop':
+      case 'loop': {
         // Cycle through loop modes: 0 -> 1 -> 2 -> 0
         const nextMode = ((queue.repeatMode as number) + 1) % 3;
         queue.setRepeatMode(nextMode as any);
         break;
+      }
       case 'previous':
         await queue.history.previous();
         break;
