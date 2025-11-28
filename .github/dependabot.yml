@@ -1,0 +1,95 @@
+# ===========================================
+# Dependabot Configuration
+# Automatically creates PRs for dependency updates
+# ===========================================
+
+version: 2
+
+updates:
+  # Main project (Bot + API)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    groups:
+      # Group minor and patch updates together
+      production-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "@types/*"
+          - "eslint*"
+          - "typescript*"
+        update-types:
+          - "minor"
+          - "patch"
+      # Group dev dependencies
+      dev-dependencies:
+        patterns:
+          - "@types/*"
+          - "eslint*"
+          - "typescript*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Dashboard (React)
+  - package-ecosystem: "npm"
+    directory: "/dashboard"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "npm"
+      - "dashboard"
+    commit-message:
+      prefix: "deps(dashboard)"
+      include: "scope"
+    groups:
+      # Group React ecosystem updates
+      react-ecosystem:
+        patterns:
+          - "react*"
+          - "@tanstack/*"
+        update-types:
+          - "minor"
+          - "patch"
+      # Group UI dependencies
+      ui-dependencies:
+        patterns:
+          - "tailwindcss"
+          - "framer-motion"
+          - "lucide-react"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
