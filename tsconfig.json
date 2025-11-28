@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
@@ -15,14 +14,6 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@bot/*": ["src/bot/*"],
-      "@api/*": ["src/api/*"],
-      "@database/*": ["src/database/*"],
-      "@shared/*": ["src/shared/*"]
-    },
     "types": ["node"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
