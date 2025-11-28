@@ -35,13 +35,15 @@ Copy everything below this line for the top.gg long description:
 
 ---
 
-## � Live Dashboard Preview
+## 🖥️ Web Dashboard
 
-<iframe src="https://astra.novaplex.xyz" width="100%" height="500" frameborder="0" style="border-radius: 12px;"></iframe>
+> **[Click here to open the Dashboard](https://astra.novaplex.xyz)**
+
+Manage your entire server from our beautiful web dashboard - no commands needed!
 
 ---
 
-## �🎵 Premium Music Experience
+## 🎵 Premium Music Experience
 
 Transform your server into a music paradise! Play from **YouTube**, **Spotify**, **SoundCloud**, and more with stunning visual embeds.
 
