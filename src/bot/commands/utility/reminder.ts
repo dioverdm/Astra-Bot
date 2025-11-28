@@ -121,7 +121,7 @@ const command: BotCommand = {
 
         await ReminderModel.create({
           userId,
-          guildId: interaction.guildId,
+          guildId: interaction.guildId || undefined,
           channelId: interaction.channelId,
           message,
           remindAt,

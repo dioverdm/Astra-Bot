@@ -150,6 +150,9 @@ export interface IGuildConfig {
   // Giveaway settings
   giveaway?: IGiveawayConfig;
   
+  // Starboard settings
+  starboard?: IStarboardConfig;
+  
   // Premium features
   premium?: {
     enabled: boolean;
@@ -336,6 +339,16 @@ export interface IGiveawayConfig {
   pingRoleId?: string;
   logChannelId?: string;
   embedColor: string;
+}
+
+export interface IStarboardConfig {
+  enabled: boolean;
+  channelId?: string;
+  threshold: number;
+  emoji: string;
+  ignoredChannels?: string[];
+  selfStar?: boolean;
+  allowNSFW?: boolean;
 }
 
 // ============ User Data Types ============
