@@ -379,14 +379,24 @@
   - [x] Usage tracking
 
 ### 📝 Logging System
-- [ ] Message edit logs
-- [ ] Message delete logs
-- [ ] Member join/leave logs
-- [ ] Role change logs
-- [ ] Channel change logs
-- [ ] Voice activity logs
-- [ ] Moderation action logs
-- [ ] Configurable log channels
+- [x] Message edit logs
+- [x] Message delete logs
+- [x] Message bulk delete logs
+- [x] Member join/leave logs
+- [x] Member update logs (roles, nickname)
+- [x] Member ban/unban logs
+- [x] Role change logs (create, delete, update)
+- [x] Channel change logs (create, delete, update)
+- [x] Voice activity logs (join, leave, move)
+- [x] Configurable log channels (5 categories)
+- [x] Dashboard LoggingSettingsPage with full configuration
+- [x] Ignored channels and roles support
+- [x] Audit log integration for executor tracking
+- [x] Log format selection (Embed, Message, Both)
+- [x] Custom embed colors per category
+- [x] Custom footer and author settings
+- [x] Display options (timestamp, executor, thumbnail, compact)
+- [x] Live embed preview in dashboard
 
 ### 🔧 API Enhancements
 - [ ] Rate limiting with Redis
