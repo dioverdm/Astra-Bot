@@ -1,39 +1,32 @@
-name: Release
+# ===========================================
+# ASTRA BOT - Version Tag Workflow
+# ===========================================
+# This workflow creates version tags and pushes them to GitHub.
+# No GitHub Releases are created - use the dashboard Version Manager for releases.
+
+name: Tag Version
 
 on:
-  # Trigger on version tags
-  push:
-    tags:
-      - 'v*'
-  
   # Manual trigger with version input
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to release (e.g., 2.3.0)'
+        description: 'Version to tag (e.g., 2.12.0)'
         required: true
         type: string
-      release_type:
-        description: 'Release type'
-        required: true
-        default: 'minor'
-        type: choice
-        options:
-          - patch
-          - minor
-          - major
+      message:
+        description: 'Tag message (optional)'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: write
 
 jobs:
-  # Job for manual release (creates tag automatically)
-  create-tag:
-    name: Create Tag
+  tag-and-push:
+    name: Create & Push Tag
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
-    outputs:
-      tag: ${{ steps.create_tag.outputs.tag }}
     
     steps:
       - name: Checkout code
@@ -47,95 +40,52 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
       
-      - name: Create and push tag
-        id: create_tag
+      - name: Validate version format
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9]+)?$ ]]; then
+            echo "❌ Invalid version format: $VERSION"
+            echo "Expected format: X.Y.Z or X.Y.Z-suffix (e.g., 2.12.0 or 2.12.0-beta)"
+            exit 1
+          fi
+          echo "✅ Version format valid: $VERSION"
+      
+      - name: Check if tag exists
         run: |
           TAG="v${{ github.event.inputs.version }}"
-          echo "Creating tag: $TAG"
-          git tag -a "$TAG" -m "Release $TAG"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "❌ Tag $TAG already exists!"
+            exit 1
+          fi
+          echo "✅ Tag $TAG is available"
+      
+      - name: Create and push tag
+        run: |
+          TAG="v${{ github.event.inputs.version }}"
+          MESSAGE="${{ github.event.inputs.message }}"
+          
+          if [ -z "$MESSAGE" ]; then
+            MESSAGE="Release $TAG"
+          fi
+          
+          echo "� Creating tag: $TAG"
+          echo "� Message: $MESSAGE"
+          
+          git tag -a "$TAG" -m "$MESSAGE"
           git push origin "$TAG"
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
-
-  # Main release job
-  release:
-    name: Create Release
-    runs-on: ubuntu-latest
-    needs: [create-tag]
-    if: always() && (github.event_name == 'push' || needs.create-tag.result == 'success')
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event_name == 'workflow_dispatch' && format('v{0}', github.event.inputs.version) || github.ref }}
-      
-      - name: Get version
-        id: version
-        run: |
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
-            echo "tag=v${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
-          else
-            TAG=${GITHUB_REF#refs/tags/}
-            VERSION=${TAG#v}
-            echo "version=$VERSION" >> $GITHUB_OUTPUT
-            echo "tag=$TAG" >> $GITHUB_OUTPUT
-          fi
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Install dashboard dependencies
-        run: cd dashboard && npm ci
-      
-      - name: Build
-        run: npm run build
-      
-      - name: Generate changelog
-        id: changelog
-        run: |
-          echo "# 🚀 Astra Bot ${{ steps.version.outputs.tag }}" > CHANGELOG_RELEASE.md
-          echo "" >> CHANGELOG_RELEASE.md
-          echo "## 📋 What's Changed" >> CHANGELOG_RELEASE.md
-          echo "" >> CHANGELOG_RELEASE.md
           
-          # Get commits since last tag
-          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
-          if [ -n "$PREV_TAG" ]; then
-            git log ${PREV_TAG}..HEAD --pretty=format:"- %s (@%an)" >> CHANGELOG_RELEASE.md
-          else
-            git log --pretty=format:"- %s (@%an)" -20 >> CHANGELOG_RELEASE.md
-          fi
-          
-          echo "" >> CHANGELOG_RELEASE.md
-          echo "" >> CHANGELOG_RELEASE.md
-          echo "## 📦 Installation" >> CHANGELOG_RELEASE.md
-          echo '```bash' >> CHANGELOG_RELEASE.md
-          echo "git clone https://github.com/XSaitoKungX/Astra-Bot.git" >> CHANGELOG_RELEASE.md
-          echo "cd Astra-Bot" >> CHANGELOG_RELEASE.md
-          echo "npm install" >> CHANGELOG_RELEASE.md
-          echo '```' >> CHANGELOG_RELEASE.md
-          echo "" >> CHANGELOG_RELEASE.md
-          echo "## 🔗 Links" >> CHANGELOG_RELEASE.md
-          echo "- [Dashboard](https://astra.novaplex.xyz)" >> CHANGELOG_RELEASE.md
-          echo "- [Documentation](https://docs.novaplex.xyz)" >> CHANGELOG_RELEASE.md
-          echo "- [Support Server](https://discord.gg/KD84DmNA89)" >> CHANGELOG_RELEASE.md
+          echo ""
+          echo "✅ Successfully created and pushed tag: $TAG"
+          echo "🔗 View at: https://github.com/${{ github.repository }}/releases/tag/$TAG"
       
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ steps.version.outputs.tag }}
-          name: "🚀 Astra Bot ${{ steps.version.outputs.tag }}"
-          body_path: CHANGELOG_RELEASE.md
-          generate_release_notes: true
-          draft: false
-          prerelease: ${{ contains(steps.version.outputs.version, 'alpha') || contains(steps.version.outputs.version, 'beta') || contains(steps.version.outputs.version, 'rc') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Summary
+        run: |
+          echo "## 🏷️ Tag Created" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version:** v${{ github.event.inputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
+          echo "1. View the [tag](https://github.com/${{ github.repository }}/tree/v${{ github.event.inputs.version }})" >> $GITHUB_STEP_SUMMARY
+          echo "2. The changelog is managed in \`dashboard/src/config/changelog.ts\`" >> $GITHUB_STEP_SUMMARY
