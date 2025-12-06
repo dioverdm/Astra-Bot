@@ -1,7 +1,7 @@
 # 🌟 Astra Bot - Development Roadmap
 
-> **Last Updated:** 1. December 2025  
-> **Version:** 2.15.0  
+> **Last Updated:** 2. December 2025  
+> **Version:** 2.16.0  
 > **Status:** Active Development
 
 ---
@@ -42,6 +42,17 @@
 ---
 
 ## 🎯 Recent Updates
+
+### Games & Entertainment System (v2.16.0)
+- ✅ Database: Games.ts with 8 models (TriviaStats, WordGame, RPGCharacter, Pet, etc.)
+- ✅ Trivia: 500+ questions, 16 categories, 4 difficulty levels
+- ✅ Word Games: Wordle with 6 attempts, Hangman with visual stages
+- ✅ RPG: Full adventure system with 6 classes, combat, inventory, quests
+- ✅ Pets: 20+ species, 6 rarities, evolution, pet care mechanics
+- ✅ Achievements: 70+ achievements, 5 tiers, 10 categories
+- ✅ Commands: `/trivia`, `/wordgames`, `/rpg`, `/pet`, `/achievements`
+- ✅ API: Games routes with leaderboards, stats, config
+- ✅ Dashboard: GamesPage with overview, leaderboards, settings
 
 ### UI Modernization & Configuration Overhaul (v2.15.0)
 - ✅ UI Components: Modernized Button (8 variants, loading, icons)
@@ -514,12 +525,34 @@
 
 ## 🔮 Phase 4: Future Features (Planned)
 
-### 🎮 Games & Entertainment
-- [ ] Trivia system with categories
-- [ ] Word games (Wordle, Hangman)
-- [ ] RPG adventure system
-- [ ] Pet collection system
-- [ ] Achievements & badges
+### 🎮 Games & Entertainment ✅
+- [x] Trivia system with categories
+  - [x] 500+ questions across 16 categories
+  - [x] Difficulty levels (Easy, Medium, Hard, Expert)
+  - [x] Leaderboards and statistics
+  - [x] Streak bonuses and time bonuses
+- [x] Word games (Wordle, Hangman)
+  - [x] Wordle with 6 attempts
+  - [x] Hangman with hints
+  - [x] Statistics and leaderboards
+- [x] RPG adventure system
+  - [x] 6 character classes (Warrior, Mage, Rogue, Ranger, Healer, Paladin)
+  - [x] 20+ items, 15+ monsters, 9 locations
+  - [x] Combat system with elements
+  - [x] Equipment and inventory
+  - [x] Quests and shops
+- [x] Pet collection system
+  - [x] 20+ pet species across 6 rarities
+  - [x] Pet care (feed, play, pet)
+  - [x] Evolution system
+  - [x] Pet abilities and battles
+- [x] Achievements & badges
+  - [x] 70+ achievements across 10 categories
+  - [x] 5 tiers (Bronze, Silver, Gold, Platinum, Diamond)
+  - [x] Progress tracking
+  - [x] Badge display system
+- [x] Games API routes
+- [x] Games Dashboard page
 
 ### 📊 Advanced Analytics ✅
 - [x] Member activity heatmaps
