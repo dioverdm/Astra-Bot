@@ -13,7 +13,7 @@ Music, economy, leveling, moderation - everything your community needs, for free
 [![Dashboard](https://img.shields.io/badge/Open%20Dashboard-8B5CF6?style=for-the-badge&logo=react&logoColor=white)](https://astra.novaplex.xyz)
 [![Support](https://img.shields.io/badge/Join%20Support-57F287?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/KD84DmNA89)
 
-![Version](https://img.shields.io/badge/v2.17.0-purple?style=flat-square)
+![Version](https://img.shields.io/badge/v2.19.0-purple?style=flat-square)
 ![Status](https://img.shields.io/badge/status-online-green?style=flat-square)
 ![Uptime](https://img.shields.io/badge/uptime-99.9%25-brightgreen?style=flat-square)
 
@@ -69,8 +69,9 @@ Managing a Discord bot through commands is annoying. That's why Astra has a full
 **[astra.novaplex.xyz](https://astra.novaplex.xyz)**
 
 - Configure everything with clicks, not commands
-- 13 themes (yes, including Dracula and Nord)
+- 30+ themes (yes, including Dracula and Nord)
 - Real-time stats and analytics
+- Live Discord chat widget
 - Works on mobile
 - Actually looks good
 
@@ -78,17 +79,16 @@ Managing a Discord bot through commands is annoying. That's why Astra has a full
 
 ## Recent Updates
 
-### v2.17.0 (December 2024)
-- **User Reviews** - Rate Astra and add tags to your review
-- **New Changelog Page** - Standalone page with better design
-- **Commands Page** - Browse all 75+ commands with search
-- **FAQ Expansion** - 8 questions with better answers
-- **Theme Switcher** - Change themes from the landing page
+### v2.19.0
+- **VotingPage Modernization** - Complete redesign with React icons
+- **Bot Setup Tab** - Copy-ready templates for bot lists
+- **Enhanced Leaderboard** - Period filters and stats summary
+- **Webhook Secrets** - Proper validation for all bot lists
 
-### v2.16.0
-- **Bot Overview** - See all servers where Astra is active
-- **Server Stats** - Member counts, boost levels, feature badges
-- **Tab Navigation** - Switch between "My Servers" and "Bot Overview"
+### v2.18.0
+- **SEO Overhaul** - 30+ meta tags, JSON-LD schemas, sitemap
+- **Bento Grid Dashboard** - New layout with animations
+- **Loading Screen** - Modern logo animation
 
 Full changelog at [astra.novaplex.xyz/changelog](https://astra.novaplex.xyz/changelog).
 

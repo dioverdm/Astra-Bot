@@ -1,0 +1,41 @@
+# Astra Bot Dashboard - robots.txt
+# https://astra.novaplex.xyz
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://astra.novaplex.xyz/sitemap.xml
+
+# Crawl-delay (be nice to servers)
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block API endpoints from indexing
+Disallow: /api/
+Disallow: /auth/
+Disallow: /callback
+
+# Block dashboard internal routes (require auth)
+Disallow: /dashboard/*/settings
+Disallow: /dashboard/*/moderation
+Disallow: /dashboard/*/leveling
+Disallow: /dashboard/*/economy
+
+# Allow main pages
+Allow: /
+Allow: /dashboard
+Allow: /invite
+Allow: /support
+Allow: /docs
+Allow: /commands
