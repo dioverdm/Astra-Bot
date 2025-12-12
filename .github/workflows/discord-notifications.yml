@@ -213,7 +213,6 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
           LABELS_JSON: ${{ toJson(github.event.issue.labels) }}
         run: |
           if [ -z "$DISCORD_WEBHOOK" ]; then
@@ -241,21 +240,41 @@ jobs:
               ;;
           esac
           
-          LABELS=$(echo "$LABELS_JSON" | jq -r '.[].name' | tr '\n' ', ' | sed 's/, $//' || echo "None")
-          [ -z "$LABELS" ] && LABELS="None"
+          # Format labels with emojis
+          LABELS=""
+          while IFS= read -r label; do
+            [ -z "$label" ] && continue
+            case "$label" in
+              bug) LABELS="${LABELS}🐛 Bug  " ;;
+              enhancement) LABELS="${LABELS}✨ Enhancement  " ;;
+              feature) LABELS="${LABELS}🚀 Feature  " ;;
+              documentation) LABELS="${LABELS}📚 Docs  " ;;
+              help*) LABELS="${LABELS}❓ Help  " ;;
+              good*) LABELS="${LABELS}👍 Good First  " ;;
+              priority:*) 
+                prio="${label#priority: }"
+                case "$prio" in
+                  high|critical) LABELS="${LABELS}🔴 $prio  " ;;
+                  medium) LABELS="${LABELS}🟡 $prio  " ;;
+                  low) LABELS="${LABELS}🟢 $prio  " ;;
+                  *) LABELS="${LABELS}⚪ $prio  " ;;
+                esac
+                ;;
+              type:*) LABELS="${LABELS}📋 ${label#type: }  " ;;
+              area:*) LABELS="${LABELS}📁 ${label#area: }  " ;;
+              *) LABELS="${LABELS}🏷️ $label  " ;;
+            esac
+          done < <(echo "$LABELS_JSON" | jq -r '.[].name')
           
-          DESC="${ISSUE_BODY:-No description provided.}"
-          DESC=$(echo "$DESC" | head -c 200)
+          [ -z "$LABELS" ] && LABELS="None"
           
           PAYLOAD=$(jq -n \
             --arg title "$TITLE" \
             --arg issue_title "$ISSUE_TITLE" \
             --arg issue_num "#${{ github.event.issue.number }}" \
             --arg issue_url "${{ github.event.issue.html_url }}" \
-            --arg desc "$DESC" \
             --argjson color "$COLOR" \
             --arg labels "$LABELS" \
-            --arg comments "${{ github.event.issue.comments }}" \
             --arg author "${{ github.event.issue.user.login }}" \
             --arg author_icon "${{ github.event.issue.user.avatar_url }}" \
             --arg footer "$BOT_NAME • GitHub" \
@@ -263,12 +282,11 @@ jobs:
             '{
               embeds: [{
                 title: $title,
-                description: "**[\($issue_num)](\($issue_url)) \($issue_title)**\n\n\($desc)",
+                description: "**[\($issue_num)](\($issue_url)) \($issue_title)**",
                 url: $issue_url,
                 color: $color,
                 fields: [
-                  { name: "🏷️ Labels", value: $labels, inline: true },
-                  { name: "💬 Comments", value: $comments, inline: true }
+                  { name: "Labels", value: $labels, inline: false }
                 ],
                 author: { name: $author, icon_url: $author_icon },
                 footer: { text: $footer, icon_url: $footer_icon },
