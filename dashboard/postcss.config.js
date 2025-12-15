@@ -1,13 +1,11 @@
 // ===========================================
 // PostCSS Configuration - Astra Dashboard
+// Tailwind CSS 4.x compatible
 // ===========================================
 
 export default {
   plugins: {
-    // Tailwind CSS (includes nesting by default in v3.4+)
-    tailwindcss: {},
-    
-    // Autoprefixer for browser compatibility
-    autoprefixer: {},
+    // Tailwind CSS 4.x uses @tailwindcss/postcss
+    '@tailwindcss/postcss': {},
   },
 };
