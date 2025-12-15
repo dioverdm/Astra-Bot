@@ -1,7 +1,7 @@
 # 🌟 Astra Bot - Development Roadmap
 
-> **Last Updated:** 11. December 2025  
-> **Version:** 2.19.1  
+> **Last Updated:** 15. December 2025  
+> **Version:** 2.21.0  
 > **Status:** Active Development  
 > **Repository:** [github.com/XSaitoKungX/Astra-Bot](https://github.com/XSaitoKungX/Astra-Bot)
 
@@ -45,6 +45,31 @@
 ---
 
 ## 🎯 Recent Updates
+
+### AI Chatbot & Version Release System (v2.21.0)
+- ✅ AI: Astra AI chatbot with Google Gemini integration
+- ✅ AI: Auto-reply when mentioning Astra or using trigger words
+- ✅ AI: Astra info embed when triggered without a question
+- ✅ AI: Dashboard AI chat with Markdown rendering
+- ✅ AI: Fixed Bot/User avatars in dashboard chat
+- ✅ Release: Version release announcement system
+- ✅ Release: `/release create` command with modal for creating releases
+- ✅ Release: `/release announce` to broadcast to all servers
+- ✅ Release: `/release preview` to preview announcement embed
+- ✅ Release: `/release delete` to remove releases
+- ✅ Release: Autocomplete for version selection
+- ✅ Release: `/changelog channel` to set announcement channel per guild
+- ✅ Release: `/changelog latest` and `/changelog history` commands
+- ✅ Fix: Ephemeral deprecation warning (use MessageFlags.Ephemeral)
+- ✅ Fix: Changelog field truncation for Discord 1024 char limit
+- ✅ Fix: Deploy commands hanging issue resolved
+- ✅ Fix: Notification model export for API
+
+### Major Dependency Update & Tailwind CSS 4.x Migration (v2.20.0)
+- ✅ Dependencies: Updated React to v19, React Router to v7, Tailwind CSS to v4
+- ✅ Dependencies: Updated Vite to v7, Mongoose to v9, Express to v5, Zod to v4
+- ✅ Tailwind: Full migration to Tailwind CSS 4.x syntax
+- ✅ Dashboard: New CommandsPage, MembersPage, GuildSelectPage, ReviewsManagerPage
 
 ### Stability & GitHub Discord Notifications (v2.19.1)
 - ✅ GitHub: Advanced Discord webhook notifications workflow (push, PR, issues, releases, CI failure, stars, forks)
@@ -722,8 +747,11 @@
 
 ### 🎯 Medium Priority
 
-#### 🤖 AI Integration
-- [ ] AI-powered chatbot (/ask command)
+#### 🤖 AI Integration ✅
+- [x] AI-powered chatbot (Astra AI with Google Gemini)
+- [x] Auto-reply when mentioning Astra or trigger words
+- [x] Astra info embed when triggered without question
+- [x] Dashboard AI chat with Markdown rendering
 - [ ] Smart moderation suggestions
 - [ ] Auto-translation for messages
 - [ ] Sentiment analysis for moderation
