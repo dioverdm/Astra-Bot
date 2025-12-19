@@ -207,6 +207,7 @@ model UserVote {
   id        String   @id @default(cuid())
   
   discordId String
+  username  String?   // Username at time of vote (optional for old records)
   
   userId    String?
   user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
@@ -216,14 +217,24 @@ model UserVote {
   isWeekend   Boolean @default(false)
   multiplier  Float   @default(1.0)
   
-  rewardCoins Int     @default(0)
-  rewardXp    Int     @default(0)
+  // Rewards
+  rewardCoins   Int     @default(0)
+  rewardXp      Int     @default(0)
+  rewardClaimed Boolean @default(false)
+  rewardAmount  Int     @default(0)
+  xpAmount      Int     @default(0)
+  
+  // Streak tracking
+  streak    Int     @default(1)
   
   votedAt   DateTime @default(now())
   
   // Vote reminder tracking
   reminderSent        Boolean   @default(false)
   reminderScheduledFor DateTime?
+  
+  // Additional metadata (stored as JSON)
+  metadata  Json?
   
   @@index([discordId, platform])
   @@index([discordId])
