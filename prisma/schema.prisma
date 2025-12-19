@@ -592,8 +592,19 @@ model AIConversation {
   guildId   String?
   channelId String?
   
+  // Conversation metadata
+  title       String   @default("New Conversation")
+  contextType String   @default("dashboard") // 'guild', 'dashboard', 'dm'
+  
+  // AI configuration
+  aiModel    String   @default("llama-3.3-70b-versatile")
+  aiProvider String   @default("groq")
+  
   // Conversation history as JSONB
   messages  Json     @default("[]")
+  
+  // Additional metadata (personality, system prompt, etc.)
+  metadata  Json?
   
   // Token usage tracking
   totalTokens Int    @default(0)
@@ -603,6 +614,7 @@ model AIConversation {
   
   @@index([discordId])
   @@index([guildId, channelId])
+  @@index([userId, contextType])
 }
 
 // ============================================
