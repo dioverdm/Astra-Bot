@@ -78,21 +78,23 @@ model Guild {
   memberCount Int    @default(0)
   
   // Module configs as JSONB (complex nested structures)
-  moderationConfig Json @default("{}")
-  levelingConfig   Json @default("{}")
-  economyConfig    Json @default("{}")
-  welcomeConfig    Json @default("{}")
-  loggingConfig    Json @default("{}")
-  ticketConfig     Json @default("{}")
-  automodConfig    Json @default("{}")
-  musicConfig      Json @default("{}")
-  gamesConfig      Json @default("{}")
-  votingConfig     Json @default("{}")
-  verifyConfig     Json @default("{}")
-  tempVoiceConfig  Json @default("{}")
-  starboardConfig  Json @default("{}")
-  birthdayConfig   Json @default("{}")
-  aiConfig         Json @default("{}")
+  moderationConfig    Json @default("{}")
+  levelingConfig      Json @default("{}")
+  economyConfig       Json @default("{}")
+  welcomeConfig       Json @default("{}")
+  loggingConfig       Json @default("{}")
+  ticketConfig        Json @default("{}")
+  automodConfig       Json @default("{}")
+  autoRolesConfig     Json @default("{}")
+  musicConfig         Json @default("{}")
+  gamesConfig         Json @default("{}")
+  votingConfig        Json @default("{}")
+  verifyConfig        Json @default("{}")
+  tempVoiceConfig     Json @default("{}")
+  starboardConfig     Json @default("{}")
+  birthdayConfig      Json @default("{}")
+  aiConfig            Json @default("{}")
+  aiModerationConfig  Json @default("{}")
   
   // Simple flags (frequently queried)
   premium          Boolean @default(false)
@@ -1196,6 +1198,61 @@ model WordGameStats {
   
   @@unique([discordId, guildId])
   @@index([guildId, gamesWon(sort: Desc)])
+}
+
+// ============================================
+// AI MODERATION
+// ============================================
+
+model ModerationSuggestion {
+  id        String   @id @default(cuid())
+  
+  messageId String
+  guildId   String
+  userId    String
+  content   String
+  
+  toxicityScore Float
+  categories    Json     @default("[]")
+  suggestedAction String
+  reason        String
+  confidence    Float
+  severity      String
+  explanation   String?
+  
+  status    String   @default("pending") // pending, approved, rejected, auto_actioned
+  
+  reviewedBy  String?
+  reviewedAt  DateTime?
+  reviewNote  String?
+  actionTaken String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([guildId, status])
+  @@index([guildId, createdAt])
+  @@index([messageId])
+  @@index([userId])
+}
+
+model SentimentData {
+  id        String   @id @default(cuid())
+  
+  userId    String
+  guildId   String
+  text      String
+  
+  sentiment String   // positive, negative, neutral
+  score     Float
+  emotions  Json     @default("{}")
+  toxicity  Float?
+  confidence Float
+  
+  createdAt DateTime @default(now())
+  
+  @@index([guildId, createdAt])
+  @@index([userId])
 }
 
 // ============================================

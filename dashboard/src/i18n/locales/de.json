@@ -1,0 +1,169 @@
+{
+  "nav": {
+    "features": "Features",
+    "commands": "Befehle",
+    "servers": "Server",
+    "reviews": "Bewertungen",
+    "anime": "Anime",
+    "status": "Status",
+    "login": "Anmelden",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "badge": "100% Kostenlos für Immer",
+    "title1": "Der Ultimative",
+    "title2": "Discord Bot",
+    "description": "Moderation, Leveling, Wirtschaft, Musik, Spaß, Anime, Tickets & mehr. Alles was du brauchst in einem mächtigen Bot.",
+    "addToDiscord": "Zu Discord hinzufügen",
+    "openDashboard": "Dashboard öffnen",
+    "stats": {
+      "servers": "Server",
+      "users": "Nutzer",
+      "commands": "Befehle",
+      "uptime": "Uptime"
+    },
+    "online": "Online"
+  },
+  "features": {
+    "title": "Mächtige Features",
+    "subtitle": "Alles was du brauchst um deine Discord Community zu verwalten, zu engagieren und wachsen zu lassen",
+    "moderation": {
+      "title": "Erweiterte Moderation",
+      "description": "Auto-Mod, Warnungen, Bans, Mutes und umfassendes Logging"
+    },
+    "leveling": {
+      "title": "Leveling System",
+      "description": "XP Belohnungen, individuelle Rank Cards, Rollen-Belohnungen und Bestenlisten"
+    },
+    "economy": {
+      "title": "Wirtschaftssystem",
+      "description": "Virtuelle Währung, Shop, Glücksspiel, tägliche Belohnungen und Handel"
+    },
+    "music": {
+      "title": "Musik Player",
+      "description": "Hochwertige Wiedergabe von YouTube, Spotify und SoundCloud"
+    },
+    "tickets": {
+      "title": "Ticket System",
+      "description": "Support-Tickets mit Kategorien, Transkripten und Staff-Rollen"
+    },
+    "fun": {
+      "title": "Spaß & Spiele",
+      "description": "Mini-Spiele, Memes, Trivia und Unterhaltungsbefehle"
+    },
+    "tempvoice": {
+      "title": "Temp Voice",
+      "description": "Erstelle temporäre Voice-Kanäle mit voller Kontrolle"
+    },
+    "giveaways": {
+      "title": "Giveaways",
+      "description": "Veranstalte Giveaways mit Anforderungen und mehreren Gewinnern"
+    },
+    "analytics": {
+      "title": "Analytics",
+      "description": "Verfolge Server-Wachstum, Aktivität und Mitglieder-Engagement"
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "description": "YouTube, Twitch und Social Media Benachrichtigungen"
+    },
+    "welcomer": {
+      "title": "Willkommensnachrichten",
+      "description": "Anpassbare Willkommenskarten und Nachrichten für neue Mitglieder"
+    },
+    "automod": {
+      "title": "Auto Moderation",
+      "description": "Spam-Schutz, Link-Filterung und Wort-Blacklists"
+    }
+  },
+  "commands": {
+    "title": "Mächtige Befehle",
+    "subtitle": "Slash-Befehle für jeden Bedarf",
+    "viewAll": "Alle Befehle anzeigen",
+    "count": "{{count}}+ Befehle"
+  },
+  "servers": {
+    "title": "Vertraut von Erstaunlichen Communities",
+    "subtitle": "Schließe dich tausenden Servern an, die bereits Astra nutzen",
+    "trustedBy": "Vertraut von",
+    "trustedByTitle": "Powering Communities Weltweit",
+    "stats": {
+      "activeServers": "Aktive Server",
+      "totalUsers": "Gesamte Nutzer",
+      "uptime": "Uptime",
+      "support": "24/7 Support"
+    }
+  },
+  "reviews": {
+    "badge": "Nutzerbewertungen",
+    "title": "Geliebt von Communities",
+    "subtitle": "Sieh was Server-Besitzer und Nutzer über Astra sagen"
+  },
+  "whyAstra": {
+    "title": "Warum Astra?",
+    "subtitle": "Gebaut für Communities",
+    "description": "Entdecke was Astra zur perfekten Wahl für deinen Discord Server macht",
+    "free": {
+      "title": "100% Kostenlos",
+      "description": "Alle Features verfügbar ohne Kosten. Keine Premium-Stufen oder Paywalls."
+    },
+    "reliable": {
+      "title": "99.9% Uptime",
+      "description": "Felsenfeste Zuverlässigkeit mit minimaler Downtime."
+    },
+    "fast": {
+      "title": "Blitzschnell",
+      "description": "Optimierte Performance für sofortige Befehlsantworten."
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Aktives Support-Team bereit zu helfen, jederzeit."
+    },
+    "secure": {
+      "title": "Sicher & Geschützt",
+      "description": "Deine Daten sind verschlüsselt und geschützt."
+    },
+    "easy": {
+      "title": "Einfach zu Nutzen",
+      "description": "Intuitive Befehle und schönes Dashboard."
+    }
+  },
+  "cta": {
+    "title": "Bereit deinen Server zu Transformieren?",
+    "subtitle": "Schließe dich tausenden Communities an, die bereits Astra nutzen",
+    "addToDiscord": "Zu Discord hinzufügen",
+    "joinCommunity": "Community beitreten",
+    "freeForever": "Für immer kostenlos • Keine Kreditkarte erforderlich"
+  },
+  "common": {
+    "scroll": "Nach unten scrollen",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg"
+  },
+  "footer": {
+    "product": "Produkt",
+    "features": "Features",
+    "commands": "Befehle",
+    "changelog": "Changelog",
+    "status": "Status",
+    "discord": "Discord",
+    "github": "GitHub",
+    "docs": "Dokumentation",
+    "support": "Support",
+    "legal": "Rechtliches",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "imprint": "Impressum",
+    "copyright": "© {{year}} Astra Bot. Alle Rechte vorbehalten.",
+    "madeWith": "Gemacht mit ❤️ von"
+  },
+  "theme": {
+    "settings": "Theme Einstellungen",
+    "personalize": "Personalisiere dein Dashboard",
+    "dark": "Dunkel",
+    "light": "Hell",
+    "color": "Farbenfroh",
+    "season": "Saisonal"
+  }
+}

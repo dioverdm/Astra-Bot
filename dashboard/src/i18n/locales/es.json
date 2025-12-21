@@ -1,0 +1,169 @@
+{
+  "nav": {
+    "features": "Características",
+    "commands": "Comandos",
+    "servers": "Servidores",
+    "reviews": "Reseñas",
+    "anime": "Anime",
+    "status": "Estado",
+    "login": "Iniciar sesión",
+    "dashboard": "Panel"
+  },
+  "hero": {
+    "badge": "100% Gratis para Siempre",
+    "title1": "El Bot de Discord",
+    "title2": "Definitivo",
+    "description": "Moderación, Nivelación, Economía, Música, Diversión, Anime, Tickets y más. Todo lo que necesitas en un bot potente.",
+    "addToDiscord": "Añadir a Discord",
+    "openDashboard": "Abrir Panel",
+    "stats": {
+      "servers": "Servidores",
+      "users": "Usuarios",
+      "commands": "Comandos",
+      "uptime": "Tiempo activo"
+    },
+    "online": "En línea"
+  },
+  "features": {
+    "title": "Características Potentes",
+    "subtitle": "Todo lo que necesitas para gestionar, involucrar y hacer crecer tu comunidad de Discord",
+    "moderation": {
+      "title": "Moderación Avanzada",
+      "description": "Auto-mod, advertencias, baneos, silenciamientos y registro completo"
+    },
+    "leveling": {
+      "title": "Sistema de Niveles",
+      "description": "Recompensas de XP, tarjetas de rango personalizadas, recompensas de roles y tablas de clasificación"
+    },
+    "economy": {
+      "title": "Sistema de Economía",
+      "description": "Moneda virtual, tienda, juegos de azar, recompensas diarias e intercambios"
+    },
+    "music": {
+      "title": "Reproductor de Música",
+      "description": "Reproducción de alta calidad desde YouTube, Spotify y SoundCloud"
+    },
+    "tickets": {
+      "title": "Sistema de Tickets",
+      "description": "Tickets de soporte con categorías, transcripciones y roles de personal"
+    },
+    "fun": {
+      "title": "Diversión y Juegos",
+      "description": "Mini-juegos, memes, trivia y comandos de entretenimiento"
+    },
+    "tempvoice": {
+      "title": "Voz Temporal",
+      "description": "Crea canales de voz temporales con control total"
+    },
+    "giveaways": {
+      "title": "Sorteos",
+      "description": "Organiza sorteos con requisitos y múltiples ganadores"
+    },
+    "analytics": {
+      "title": "Analíticas",
+      "description": "Rastrea el crecimiento del servidor, actividad y compromiso de miembros"
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "description": "Notificaciones de YouTube, Twitch y redes sociales"
+    },
+    "welcomer": {
+      "title": "Mensajes de Bienvenida",
+      "description": "Tarjetas y mensajes de bienvenida personalizables para nuevos miembros"
+    },
+    "automod": {
+      "title": "Auto Moderación",
+      "description": "Protección anti-spam, filtrado de enlaces y listas negras de palabras"
+    }
+  },
+  "commands": {
+    "title": "Comandos Potentes",
+    "subtitle": "Comandos slash para cada necesidad",
+    "viewAll": "Ver Todos los Comandos",
+    "count": "{{count}}+ Comandos"
+  },
+  "servers": {
+    "title": "Confiado por Comunidades Increíbles",
+    "subtitle": "Únete a miles de servidores que ya usan Astra",
+    "trustedBy": "Confiado por",
+    "trustedByTitle": "Impulsando Comunidades en Todo el Mundo",
+    "stats": {
+      "activeServers": "Servidores Activos",
+      "totalUsers": "Usuarios Totales",
+      "uptime": "Tiempo Activo",
+      "support": "Soporte 24/7"
+    }
+  },
+  "reviews": {
+    "badge": "Reseñas de Usuarios",
+    "title": "Amado por las Comunidades",
+    "subtitle": "Mira lo que los dueños de servidores y usuarios dicen sobre Astra"
+  },
+  "whyAstra": {
+    "title": "¿Por qué Astra?",
+    "subtitle": "Construido para Comunidades",
+    "description": "Descubre qué hace de Astra la elección perfecta para tu servidor de Discord",
+    "free": {
+      "title": "100% Gratis",
+      "description": "Todas las características disponibles sin costo. Sin niveles premium ni muros de pago."
+    },
+    "reliable": {
+      "title": "99.9% de Disponibilidad",
+      "description": "Fiabilidad sólida con tiempo de inactividad mínimo."
+    },
+    "fast": {
+      "title": "Ultrarrápido",
+      "description": "Rendimiento optimizado para respuestas instantáneas a comandos."
+    },
+    "support": {
+      "title": "Soporte 24/7",
+      "description": "Equipo de soporte activo listo para ayudar en cualquier momento."
+    },
+    "secure": {
+      "title": "Seguro y Protegido",
+      "description": "Tus datos están encriptados y protegidos."
+    },
+    "easy": {
+      "title": "Fácil de Usar",
+      "description": "Comandos intuitivos y panel hermoso."
+    }
+  },
+  "cta": {
+    "title": "¿Listo para Transformar tu Servidor?",
+    "subtitle": "Únete a miles de comunidades que ya usan Astra",
+    "addToDiscord": "Añadir a Discord",
+    "joinCommunity": "Unirse a la Comunidad",
+    "freeForever": "Gratis para siempre • No se requiere tarjeta de crédito"
+  },
+  "common": {
+    "scroll": "Desplazar hacia abajo",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito"
+  },
+  "footer": {
+    "product": "Producto",
+    "features": "Características",
+    "commands": "Comandos",
+    "changelog": "Registro de cambios",
+    "status": "Estado",
+    "discord": "Discord",
+    "github": "GitHub",
+    "docs": "Documentación",
+    "support": "Soporte",
+    "legal": "Legal",
+    "privacy": "Política de privacidad",
+    "terms": "Términos de servicio",
+    "imprint": "Aviso legal",
+    "copyright": "© {{year}} Astra Bot. Todos los derechos reservados.",
+    "madeWith": "Hecho con ❤️ por"
+  },
+  "theme": {
+    "settings": "Configuración del Tema",
+    "personalize": "Personaliza tu panel",
+    "dark": "Oscuro",
+    "light": "Claro",
+    "color": "Colorido",
+    "season": "Estacional"
+  }
+}
