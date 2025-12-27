@@ -6,24 +6,26 @@
 // This script handles:
 // - Automatic TypeScript compilation
 // - File watching for auto-rebuild (using chokidar)
-// - Starting the bot ONLY (no dashboard)
+// - Starting the bot and API server
 // ===========================================
 
 import { spawn, execSync } from 'child_process';
 import { watch } from 'chokidar';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { existsSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Configuration - MODIFIED
+// Configuration
 const CONFIG = {
   // Enable file watcher for auto-rebuild (default: true)
   watchEnabled: process.env.FILE_WATCHER_ENABLED !== 'false',
-  // Only watch bot source directory - MODIFIED
+  // Directories to watch
   watchDirs: [
     join(__dirname, 'src'),
+    join(__dirname, 'dashboard/src'),
   ],
   // Ignored patterns
   ignored: [
@@ -32,7 +34,6 @@ const CONFIG = {
     '**/.git/**',
     '**/package-lock.json',
     '**/*.d.ts',
-    '**/dashboard/**', // Added: ignore dashboard completely
   ],
   // Debounce time for rebuilds (ms)
   rebuildDebounce: 1000,
@@ -61,26 +62,32 @@ function logHeader() {
   console.log(`
 ${colors.magenta}╔══════════════════════════════════════════════════╗
 ║                                                  ║
-║     ${colors.bright}✨ ASTRA BOT ONLY - Startup${colors.reset}${colors.magenta}                 ║
-║         (Dashboard disabled)                     ║
+║     ${colors.bright}✨ ASTRA BOT - Production Startup${colors.reset}${colors.magenta}             ║
 ║                                                  ║
 ╚══════════════════════════════════════════════════╝${colors.reset}
 `);
 }
 
-// Build the project - MODIFIED: Bot only
+// Build the project
 async function build() {
-  log('🔨 Building bot ONLY (no dashboard)...', colors.yellow);
+  log('🔨 Building project...', colors.yellow);
   
   try {
-    // Build bot (TypeScript) only
+    // Build bot (TypeScript)
     log('  → Compiling TypeScript...', colors.blue);
     execSync('npx tsc', { stdio: 'inherit', cwd: __dirname });
     
-    log('✅ Bot build complete!', colors.green);
+    // Check if dashboard needs building
+    const dashboardDist = join(__dirname, 'dashboard', 'dist');
+    if (!existsSync(dashboardDist)) {
+      log('  → Building dashboard...', colors.blue);
+      execSync('npm run build:dashboard', { stdio: 'inherit', cwd: __dirname });
+    }
+    
+    log('✅ Build complete!', colors.green);
     return true;
   } catch (error) {
-    log('❌ Bot build failed!', colors.red);
+    log('❌ Build failed!', colors.red);
     console.error(error.message);
     return false;
   }
@@ -91,11 +98,11 @@ let appProcess = null;
 
 function startApp() {
   if (appProcess) {
-    log('🔄 Restarting bot...', colors.yellow);
+    log('🔄 Restarting application...', colors.yellow);
     appProcess.kill();
   }
   
-  log('🚀 Starting Astra BOT...', colors.green);
+  log('🚀 Starting Astra...', colors.green);
   
   appProcess = spawn('node', [CONFIG.entryPoint], {
     stdio: 'inherit',
@@ -103,23 +110,22 @@ function startApp() {
     env: {
       ...process.env,
       NODE_ENV: process.env.NODE_ENV || 'production',
-      DASHBOARD_ENABLED: 'false', // Add flag to disable dashboard in bot
     },
   });
   
   appProcess.on('error', (error) => {
-    log(`❌ Failed to start bot: ${error.message}`, colors.red);
+    log(`❌ Failed to start: ${error.message}`, colors.red);
   });
   
   appProcess.on('exit', (code, signal) => {
     if (signal !== 'SIGTERM' && signal !== 'SIGINT') {
-      log(`⚠️ Bot process exited with code ${code}`, colors.yellow);
+      log(`⚠️ Process exited with code ${code}`, colors.yellow);
     }
   });
 }
 
 // ════════════════════════════════════════════════════════════════
-// 👀 FILE WATCHER (using chokidar) - MODIFIED: Bot only
+// 👀 FILE WATCHER (using chokidar)
 // ════════════════════════════════════════════════════════════════
 
 class FileWatcher {
@@ -128,15 +134,16 @@ class FileWatcher {
     this.debounceTimer = null;
     this.buildInProgress = false;
     this.buildQueued = false;
+    this.dashboardBuildQueued = false;
   }
-  
+
   start() {
     if (!CONFIG.watchEnabled) {
       log('📁 File watcher disabled', colors.yellow);
       return;
     }
-    
-    log('👁️ Initializing file watcher (bot only)...', colors.blue);
+
+    log('👁️ Initializing file watcher...', colors.blue);
     
     this.watcher = watch(CONFIG.watchDirs, {
       persistent: true,
@@ -147,55 +154,88 @@ class FileWatcher {
         pollInterval: 100
       }
     });
-    
+
     this.watcher
       .on('add', path => this.handleChange('added', path))
       .on('change', path => this.handleChange('changed', path))
       .on('unlink', path => this.handleChange('deleted', path))
       .on('error', error => log(`❌ File watcher error: ${error.message}`, colors.red));
-    
+
     log('✅ File watcher started - Auto-rebuild enabled!', colors.green);
-    log(`   → Watching: src/ (bot only)`, colors.cyan);
-    log(`   → Dashboard: DISABLED`, colors.yellow);
+    log(`   → Watching: src/ (bot)`, colors.cyan);
+    log(`   → Watching: dashboard/src/ (dashboard)`, colors.magenta);
   }
-  
+
   handleChange(action, filepath) {
     const relativePath = filepath.replace(__dirname + '/', '');
+    const isDashboard = relativePath.startsWith('dashboard/');
     
-    log(`📝 File ${action}: ${relativePath}`, colors.cyan);
-    
+    log(`📝 File ${action}: ${relativePath}`, isDashboard ? colors.magenta : colors.cyan);
+
     // Debounce to avoid multiple rapid rebuilds
     clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(() => {
-      this.triggerBotBuild();
+      if (isDashboard) {
+        this.triggerDashboardBuild();
+      } else {
+        this.triggerBotBuild();
+      }
     }, CONFIG.rebuildDebounce);
   }
-  
+
   async triggerBotBuild() {
     if (this.buildInProgress) {
       this.buildQueued = true;
       log('⏳ Build in progress, queuing...', colors.yellow);
       return;
     }
-    
+
     this.buildInProgress = true;
     log('🔨 Changes detected - Rebuilding bot...', colors.yellow);
-    
+
     const success = await build();
     
     this.buildInProgress = false;
-    
+
     if (success) {
       startApp();
       log('✅ Bot rebuild complete! 🎉', colors.green);
     }
-    
+
     if (this.buildQueued) {
       this.buildQueued = false;
       setTimeout(() => this.triggerBotBuild(), 1000);
     }
   }
-  
+
+  async triggerDashboardBuild() {
+    if (this.buildInProgress) {
+      this.dashboardBuildQueued = true;
+      log('⏳ Build in progress, queuing dashboard build...', colors.yellow);
+      return;
+    }
+
+    this.buildInProgress = true;
+    log('🎨 Changes detected - Rebuilding dashboard...', colors.magenta);
+
+    try {
+      const startTime = Date.now();
+      execSync('npm run build:dashboard', { stdio: 'inherit', cwd: __dirname });
+      const buildTime = ((Date.now() - startTime) / 1000).toFixed(2);
+      log(`✅ Dashboard rebuild complete in ${buildTime}s! Refresh your browser. 🎉`, colors.green);
+    } catch (error) {
+      log('❌ Dashboard build failed!', colors.red);
+      console.error(error.message);
+    }
+
+    this.buildInProgress = false;
+
+    if (this.dashboardBuildQueued) {
+      this.dashboardBuildQueued = false;
+      setTimeout(() => this.triggerDashboardBuild(), 1000);
+    }
+  }
+
   stop() {
     if (this.watcher) {
       this.watcher.close();
@@ -234,7 +274,6 @@ async function main() {
   
   log(`Environment: ${process.env.NODE_ENV || 'production'}`, colors.blue);
   log(`File Watcher: ${CONFIG.watchEnabled ? 'Enabled' : 'Disabled'}`, colors.blue);
-  log(`Dashboard: DISABLED`, colors.yellow);
   
   setupShutdown();
   
